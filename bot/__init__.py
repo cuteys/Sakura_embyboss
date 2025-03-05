@@ -72,7 +72,8 @@ user_p = [
     BotCommand("myinfo", "[用户] 查看状态"),
     BotCommand("count", "[用户] 媒体库数量"),
     BotCommand("red", "[用户/禁言] 发红包"),
-    BotCommand("srank", "[用户/禁言] 查看计分")]
+    BotCommand("srank", "[用户/禁言] 查看计分"),
+    BotCommand("rob", "[用户] 开始对决事件")]
 
 # 取消 BotCommand("exchange", "[私聊] 使用注册码")
 admin_p = user_p + [
