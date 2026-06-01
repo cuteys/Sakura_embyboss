@@ -34,6 +34,8 @@ def judge_start_ikb(is_admin: bool, account: bool) -> InlineKeyboardMarkup:
             d.append(['🎟️ 使用续期码', 'exchange'])
         if schedall.partition_check and len(config.partition_libs) > 0:
             d.append(['🎟️ 使用分区码', 'partitioncode'])
+        if _open.use_whitelist_code:
+            d.append(['🔑 使用白名单码', 'wl_exchange'])
     if _open.checkin:
         d.append(['🎯 签到', 'checkin'])
 
@@ -152,7 +154,7 @@ async def cr_page_server():
 
 """admins ↓"""
 
-gm_ikb_content = ikb([[('⭕ 注册状态', 'open-menu'), ('🎟️ 注册/续期码', 'cr_link')],
+gm_ikb_content = ikb([[('⭕ 注册状态', 'open-menu'), ('🎟️ 创建兑换码', 'cr_link')],
                       [('💊 查询注册', 'ch_link'), ('🏬 兑换设置', 'set_renew')],
                       [('👥 用户列表', 'normaluser'), ('👑 白名单列表', 'whitelist'), ('💠 设备列表', 'user_devices')],
                       [('🌏 定时', 'schedall'), ('🕹️ 主界面', 'back_start'), ('其他 🪟', 'back_config')]])
@@ -324,6 +326,7 @@ def cr_renew_ikb():
     checkin = '✔️' if _open.checkin else '❌'
     exchange = '✔️' if _open.exchange else '❌'
     whitelist = '✔️' if _open.whitelist else '❌'
+    use_whitelist_code = '✔️' if _open.use_whitelist_code else '❌'
     invite = '✔️' if _open.invite else '❌'
     # 添加邀请等级的显示
     lv_dic = {
@@ -339,6 +342,7 @@ def cr_renew_ikb():
                  InlineButton(f'签到等级: {checkin_lv_text}', f'set_checkin_lv'),
                  InlineButton(f'{exchange} 自动{sakura_b}续期', f'set_renew-exchange'),
                  InlineButton(f'{whitelist} 兑换白名单', f'set_renew-whitelist'),
+                 InlineButton(f'{use_whitelist_code} 白名单码', f'set_renew-use_whitelist_code'),
                  InlineButton(f'{invite} 兑换邀请码', f'set_renew-invite'),
                  InlineButton(f'邀请等级: {invite_lv_text}', f'set_invite_lv')
                  )
